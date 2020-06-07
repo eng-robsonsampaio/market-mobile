@@ -18,7 +18,7 @@ const Routes = createAppContainer(
         Profile:{
             screen: Profile,
             navigationOptions:{
-                title: 'Client',
+                title: 'Basket',
                 headerTitleAlign: 'center',
                 cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
                 

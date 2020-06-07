@@ -2,16 +2,28 @@ import React from 'react';
 import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native'; 
 import { MaterialIcons } from '@expo/vector-icons';
 
-function HeaderProfile({nav}){
+const teste = "teste"
+
+function HeaderProfile(props){
+
+    const { client } = props
+
     return (
         <>
         <View style={styles.container}>
             <View style={styles.clientHeader}>   
                 <Image 
                     style={styles.avatar} 
-                    source={{ uri: 'https://avatars3.githubusercontent.com/u/47099265?s=460&u=cd0f62c0e6c8912a1ddb3854ed79f9232289310f&v=4' }} />
-                <Text style={styles.clientName}>Robson Sampaio</Text>
-                <TouchableOpacity onPress={()=>{nav.navigate('Profile')}} style={styles.loadProfile} >
+                    source={{ uri: client.avatar }} />
+                <Text style={styles.clientName}>{client.name}</Text>
+                <TouchableOpacity 
+                    onPress={() => 
+                    {
+                        props.nav.navigate('Profile', { 
+                        client: client,
+                    });
+                    }} 
+                     style={styles.loadProfile} >
                     <MaterialIcons name='keyboard-arrow-right' size={40} color="#000"/>
                 </TouchableOpacity>
             </View>
@@ -55,7 +67,7 @@ const styles = StyleSheet.create({
         width: 160,
         // backgroundColor: "#ddd",
         fontWeight: 'bold',
-        fontSize: 16,
+        fontSize: 23,
         marginLeft: 10,
     },
     loadProfile:{
