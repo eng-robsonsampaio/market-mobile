@@ -13,8 +13,6 @@ function Main({ navigation }){
 
     async function loadClients(){
         const response = await api.get('/clients')
-        
-        // console.log(response.data)
         setClients(response.data)
     }
 
@@ -22,10 +20,9 @@ function Main({ navigation }){
         <ScrollView>
             {
                 clients.map(client => (
-                    // console.log(client.basket)
                     <HeaderProfile 
                         key={client._id} 
-                        nav={navigation}
+                        navigation={navigation}
                         client={client}/>
                 ))
             }         

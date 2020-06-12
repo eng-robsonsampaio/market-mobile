@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, Text, Image, TouchableOpacity, ScrollView, Dimensions, TextComponent } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import Basket from './Basket'
@@ -7,53 +7,89 @@ import Basket from './Basket'
 function Profile({ navigation }){
 
     const client = navigation.getParam('client')
+    const { name, avatar, phone, address} = client;
+    const [ basket, setBasket ] = useState(client.basket)
+    const [screenWidth, setScreenWidth] = useState(Dimensions.get('window').width);
 
+    useEffect(() =>{
+        
+    },[])
+
+    function changeState(item){
+        console.log(item)
+        setBasket([...basket, item])
+    }
+      
     return (
         <>
         <View style={styles.container}>
-                <View style={styles.header}>
-                    <Image 
-                        style={styles.avatar} 
-                        source={{ uri: client.avatar }} />
-                    <Text style={styles.clientName}>{client.name}</Text>
-                
-                    <View style={styles.contact}>
-                        <TouchableOpacity style={styles.phoneIcon}>
-                            <MaterialIcons name="phone-forwarded" size={30} color="#000"/>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.chatIcon}>
-                            <MaterialIcons name="sms" size={30} color="#000"/>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                <View style={styles.subHeaders}>
-                    <Text style={styles.toDoList}> TO DO </Text>
-                    <Text style={styles.doneList}> DONE </Text>
-                </View>
-        </View>
-        <ScrollView>
-            {
-                client.basket.map(prod=>(
-                    <Basket key={prod._id} prod={{good: prod.product, quant: prod.quantity, state: prod.state}}/>
-                ))
-
-            }
+            <View style={styles.header}>
+                <Image 
+                    style={styles.avatar} 
+                    source={{ uri: avatar }} />
+                <Text style={styles.clientName}>{ name }</Text>
             
+                <View style={styles.contact}>
+                    <TouchableOpacity style={styles.phoneIcon}>
+                        <MaterialIcons name="phone-forwarded" size={30} color="#000"/>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.chatIcon}>
+                        <MaterialIcons name="sms" size={30} color="#000"/>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <View style={styles.subHeaders}>
+                <TouchableOpacity onPress={()=>{}}>
+                    <Text style={styles.toDoList}> List </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>{}}>
+                    <Text style={styles.doneList}> Basket </Text>
+                </TouchableOpacity>                
+            </View>
+        </View>
+        <ScrollView horizontal={true} pagingEnabled={true} showsHorizontalScrollIndicator={true}>
+            <ScrollView style={{width: screenWidth}}>
+                {
+                    basket.map((item, index)=>(
+                        item.state == false ?
+                        <Basket  key={item._id} item={item} changeState={changeState}/> : <></>
+                     ))
+
+                }
+            </ScrollView>
+            <ScrollView style={{width: screenWidth}}>
+                {
+                    basket.map(item=>( 
+                        item.state ?                       
+                        <Basket key={item._id} item={item}/> : <></>
+                     ))
+
+                }
+            </ScrollView>                       
         </ScrollView>
         </>
     )
 }
 
 const styles = StyleSheet.create({
+viewPager: {
+    flex: 1
+    },
+    pageStyle: {
+    alignItems: 'center',
+    padding: 20,
+    },
     container:{
         height: 120,
         backgroundColor: '#aaa',
         marginBottom: 3,
+        justifyContent: 'center',
+
     },
     header:{
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         marginTop: 10,
     },
     avatar:{
@@ -81,7 +117,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
-        // marginLeft: 10,
+        
     },
     phoneIcon:{
         // backgroundColor: '#0000ff88',
@@ -106,7 +142,7 @@ const styles = StyleSheet.create({
     doneList:{
         fontWeight: 'bold',
         color: '#4e4e4e',
-    }
+    },
 })
 
 export default Profile;

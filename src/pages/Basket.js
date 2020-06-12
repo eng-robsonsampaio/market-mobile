@@ -1,41 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
+function Basket(props){    
 
-function Basket({prod}){
+    const [ intemStyle, setItemStyle ] = useState({ color: '#ffffff'})
+    const [ state, setState ] = useState(props.item.state)  
+    const [ item, setItem ]  = useState(props.item)
 
-    const [ intemStyle, setItemStyle] = useState({ color: '#ffffff'})
-    const [ toDo, setTodo ] = useState(prod.state.toDo)
-    const [ done, setDone ] = useState(prod.state.done)
-    const [ block, setBlock ] = useState(prod.state.block)
-
-function changeState(){
-        if(toDo){
-          setTodo(false);
-          setDone(true);
-          setItemStyle({ color: '#00ff00'})
-        }
-        else if(done){
-          setDone(false);
-          setBlock(true)
-          setItemStyle({ color: '#ff0000'})
-        }
-        else if(block){
-          setBlock(false);
-          setTodo(true);
-          setItemStyle({ color: '#ffffff'})
-        }
-        console.log({toDo, done, block})
-      }
+    useEffect(()=>{
+      
+    },[])
+    
+    function changeState(){
+      setState(!state)
+      setItem({ _id:item._id, product:item.product, quantity:item.quantity, weight:item.weight, state:state })
+      props.changeState([item])
+      
+    }
   
     return ( 
           <View style={styles.container}> 
             <View style={styles.productContainer}>
-              <Text style={styles.productValue}>{prod.good}</Text>
+              <Text style={styles.productValue}>{item.product}</Text>
             </View>
             <View style={styles.quantityContainer}>
-              <Text style={styles.quantityValue}>{prod.quant}</Text>
+              <Text style={styles.quantityValue}>{item.quantity}</Text>
             </View>
             <TouchableOpacity onPress={()=>{changeState()}} style={styles.checkItem}>
                  <MaterialIcons name='fiber-manual-record' size={30} style={intemStyle}/>
@@ -79,20 +69,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 0,
-
-    
-
   },
   quantityValue:{
     fontSize: 20,
-    
-
   },
   checkItem:{
-    // height: 30,
-    // width: 30,
-    // borderRadius: 5,
-    // backgroundColor: '#e6e6e6',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 5,
@@ -103,10 +84,6 @@ const styles = StyleSheet.create({
   },
   itemDone:{
     color:"#00ff00",
-
-  },
-  itemBlocked:{
-    color:"#ff0000",
 
   },
 })

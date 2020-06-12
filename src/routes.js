@@ -20,9 +20,7 @@ const Routes = createAppContainer(
             navigationOptions:{
                 title: 'Basket',
                 headerTitleAlign: 'center',
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-                
-                
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,    
             },
         },
     },
@@ -31,8 +29,12 @@ const Routes = createAppContainer(
                 headerBackTitleVisible: null,
                 headerTintColor: '#000',
                 headerStyle:{
-                    backgroundColor: '#FCAF03'
+                    backgroundColor: '#FCAF03',                                        
                 },
+                headerTitleStyle:{
+                    fontWeight: 'bold',
+                    fontSize: 25,
+                }
             }
         })
 );

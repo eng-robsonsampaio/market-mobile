@@ -4,9 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 const teste = "teste"
 
-function HeaderProfile(props){
-
-    const { client } = props
+function HeaderProfile({ client, navigation }){
 
     return (
         <>
@@ -19,7 +17,7 @@ function HeaderProfile(props){
                 <TouchableOpacity 
                     onPress={() => 
                     {
-                        props.nav.navigate('Profile', { 
+                        navigation.navigate('Profile', { 
                         client: client,
                     });
                     }} 
