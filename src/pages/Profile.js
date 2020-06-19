@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Text, Image, TouchableOpacity, ScrollView, Dimensions, TextComponent } from 'react-native';
+import { View, StyleSheet, Text, Image, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import Basket from './Basket'
@@ -7,17 +7,43 @@ import Basket from './Basket'
 function Profile({ navigation }){
 
     const client = navigation.getParam('client')
-    const { name, avatar, phone, address} = client;
-    const [ basket, setBasket ] = useState(client.basket)
-    const [screenWidth, setScreenWidth] = useState(Dimensions.get('window').width);
+    const { name, avatar, phone, address, basket } = client;
+    const [ basketToDo, setBasketToDo ] = useState([])
+    const [ basketDone, setBasketDone ] = useState([])
+    const [ screenWidth, setScreenWidth ] = useState(Dimensions.get('window').width);
 
-    useEffect(() =>{
-        
+
+    useEffect(() => {  
+        function loadBaskets(basket){
+            setBasketDone(basket.filter(item => item.state))
+            setBasketToDo(basket.filter(item => !item.state))            
+         }     
+         
+         loadBaskets(basket)         
     },[])
 
+    useEffect(()=>{console.log(basketToDo.length)},[basketToDo])
+
+    function loadBasketDone(){
+        setBasketDone(basketDone.filter(item => item.state))
+        console.log(basketDone.length)
+    }
+
+    function loadBasketToDo(){
+        setBasketToDo(basketToDo.filter(item => !item.state))
+        console.log(basketTodo.length)
+    }
+
     function changeState(item){
-        console.log(item)
-        setBasket([...basket, item])
+        console.log(item.state)
+        if(item.state){       
+            // setBasketToDo(basketToDo.filter(good => good._id != item._id))
+            // setBasketDone(basketDone => [...basketDone, item])
+        }
+        else{
+            // setBasketDone(basketDone.filter(good => good._id != item._id))
+            // setBasketToDo(basketToDo => [...basketToDo, item])
+        }
     }
       
     return (
@@ -39,10 +65,10 @@ function Profile({ navigation }){
                 </View>
             </View>
             <View style={styles.subHeaders}>
-                <TouchableOpacity onPress={()=>{}}>
+                <TouchableOpacity onPress={()=>{console.log("tste")}}>
                     <Text style={styles.toDoList}> List </Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>{}}>
+                <TouchableOpacity onPress={()=>{console.log("teste done")}}>
                     <Text style={styles.doneList}> Basket </Text>
                 </TouchableOpacity>                
             </View>
@@ -50,18 +76,28 @@ function Profile({ navigation }){
         <ScrollView horizontal={true} pagingEnabled={true} showsHorizontalScrollIndicator={true}>
             <ScrollView style={{width: screenWidth}}>
                 {
-                    basket.map((item, index)=>(
-                        item.state == false ?
-                        <Basket  key={item._id} item={item} changeState={changeState}/> : <></>
+                    basketToDo.map( item =>(
+                        <Basket  
+                            key={item._id} 
+                            item={item} 
+                            basketToDo={basketToDo} 
+                            // changeState={changeState} 
+                            setBasketToDo={setBasketToDo}
+                            loadBasketDone={loadBasketDone}/>
                      ))
 
                 }
             </ScrollView>
             <ScrollView style={{width: screenWidth}}>
                 {
-                    basket.map(item=>( 
-                        item.state ?                       
-                        <Basket key={item._id} item={item}/> : <></>
+                    basketDone.map( item =>(                
+                        <Basket  
+                            key={item._id} 
+                            item={item} 
+                            // basketDone={basketDone} 
+                            // changeState={changeState} 
+                            loadBasketToDo={loadBasketToDo}
+                            loadBasketDone={loadBasketDone}/>
                      ))
 
                 }

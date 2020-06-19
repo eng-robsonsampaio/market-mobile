@@ -2,8 +2,6 @@ import React from 'react';
 import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native'; 
 import { MaterialIcons } from '@expo/vector-icons';
 
-const teste = "teste"
-
 function HeaderProfile({ client, navigation }){
 
     return (

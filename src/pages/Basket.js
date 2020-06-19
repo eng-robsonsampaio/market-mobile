@@ -3,20 +3,27 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 function Basket(props){    
-
-    const [ intemStyle, setItemStyle ] = useState({ color: '#ffffff'})
-    const [ state, setState ] = useState(props.item.state)  
+    
     const [ item, setItem ]  = useState(props.item)
+    const [ state, setState ] = useState(props.item.state)  
+    const [ intemStyle, setItemStyle ] = useState({ color: '#ffffff'})
 
     useEffect(()=>{
-      
-    },[])
-    
-    function changeState(){
-      setState(!state)
+      console.log(state)
       setItem({ _id:item._id, product:item.product, quantity:item.quantity, weight:item.weight, state:state })
-      props.changeState([item])
-      
+    },[state]) 
+
+    useEffect(()=>{
+      props.setBasketToDo(props.basketToDo.filter(item => !item.state))
+      // props.loadBasketDone()
+    },[item])
+
+    // useEffect(()=>{
+    //   console.log()
+    // },[loadBasketDone, loadBasketToDo])
+
+    function changeState(state){    
+      setState(!state)
     }
   
     return ( 
@@ -27,7 +34,7 @@ function Basket(props){
             <View style={styles.quantityContainer}>
               <Text style={styles.quantityValue}>{item.quantity}</Text>
             </View>
-            <TouchableOpacity onPress={()=>{changeState()}} style={styles.checkItem}>
+            <TouchableOpacity onPress={()=>{changeState(state)}} style={styles.checkItem}>
                  <MaterialIcons name='fiber-manual-record' size={30} style={intemStyle}/>
             </TouchableOpacity>
           </View>
