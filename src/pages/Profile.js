@@ -7,44 +7,9 @@ import Basket from './Basket'
 function Profile({ navigation }){
 
     const client = navigation.getParam('client')
-    const { name, avatar, phone, address, basket } = client;
-    const [ basketToDo, setBasketToDo ] = useState([])
-    const [ basketDone, setBasketDone ] = useState([])
+    const { name, avatar, basket } = client;
     const [ screenWidth, setScreenWidth ] = useState(Dimensions.get('window').width);
 
-
-    useEffect(() => {  
-        function loadBaskets(basket){
-            setBasketDone(basket.filter(item => item.state))
-            setBasketToDo(basket.filter(item => !item.state))            
-         }     
-         
-         loadBaskets(basket)         
-    },[])
-
-    useEffect(()=>{console.log(basketToDo.length)},[basketToDo])
-
-    function loadBasketDone(){
-        setBasketDone(basketDone.filter(item => item.state))
-        console.log(basketDone.length)
-    }
-
-    function loadBasketToDo(){
-        setBasketToDo(basketToDo.filter(item => !item.state))
-        console.log(basketTodo.length)
-    }
-
-    function changeState(item){
-        console.log(item.state)
-        if(item.state){       
-            // setBasketToDo(basketToDo.filter(good => good._id != item._id))
-            // setBasketDone(basketDone => [...basketDone, item])
-        }
-        else{
-            // setBasketDone(basketDone.filter(good => good._id != item._id))
-            // setBasketToDo(basketToDo => [...basketToDo, item])
-        }
-    }
       
     return (
         <>
@@ -64,44 +29,24 @@ function Profile({ navigation }){
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={styles.subHeaders}>
+            {/* <View style={styles.subHeaders}>
                 <TouchableOpacity onPress={()=>{console.log("tste")}}>
                     <Text style={styles.toDoList}> List </Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>{console.log("teste done")}}>
                     <Text style={styles.doneList}> Basket </Text>
                 </TouchableOpacity>                
-            </View>
+            </View> */}
         </View>
-        <ScrollView horizontal={true} pagingEnabled={true} showsHorizontalScrollIndicator={true}>
-            <ScrollView style={{width: screenWidth}}>
+        <ScrollView >
                 {
-                    basketToDo.map( item =>(
+                    basket.map( item =>(
                         <Basket  
                             key={item._id} 
                             item={item} 
-                            basketToDo={basketToDo} 
-                            // changeState={changeState} 
-                            setBasketToDo={setBasketToDo}
-                            loadBasketDone={loadBasketDone}/>
+                            basket={basket} />
                      ))
-
-                }
-            </ScrollView>
-            <ScrollView style={{width: screenWidth}}>
-                {
-                    basketDone.map( item =>(                
-                        <Basket  
-                            key={item._id} 
-                            item={item} 
-                            // basketDone={basketDone} 
-                            // changeState={changeState} 
-                            loadBasketToDo={loadBasketToDo}
-                            loadBasketDone={loadBasketDone}/>
-                     ))
-
-                }
-            </ScrollView>                       
+                }                  
         </ScrollView>
         </>
     )

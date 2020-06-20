@@ -3,27 +3,17 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 function Basket(props){    
-    
-    const [ item, setItem ]  = useState(props.item)
-    const [ state, setState ] = useState(props.item.state)  
+
+    const [ item, setItem ]  = useState(props.item)  
     const [ intemStyle, setItemStyle ] = useState({ color: '#ffffff'})
 
-    useEffect(()=>{
-      console.log(state)
-      setItem({ _id:item._id, product:item.product, quantity:item.quantity, weight:item.weight, state:state })
-    },[state]) 
+    useEffect(() => {
+      console.log(item)
 
-    useEffect(()=>{
-      props.setBasketToDo(props.basketToDo.filter(item => !item.state))
-      // props.loadBasketDone()
     },[item])
 
-    // useEffect(()=>{
-    //   console.log()
-    // },[loadBasketDone, loadBasketToDo])
-
     function changeState(state){    
-      setState(!state)
+        setItem({ _id:item._id, product:item.product, quantity:item.quantity, weight:item.weight, state:state })        
     }
   
     return ( 
@@ -34,8 +24,8 @@ function Basket(props){
             <View style={styles.quantityContainer}>
               <Text style={styles.quantityValue}>{item.quantity}</Text>
             </View>
-            <TouchableOpacity onPress={()=>{changeState(state)}} style={styles.checkItem}>
-                 <MaterialIcons name='fiber-manual-record' size={30} style={intemStyle}/>
+            <TouchableOpacity onPress={() => {changeState(!item.state)}} style={styles.checkItem}>
+                 <MaterialIcons name={item.state ? 'check-circle' : 'radio-button-unchecked'} size={30} style={intemStyle}/>
             </TouchableOpacity>
           </View>
      );
