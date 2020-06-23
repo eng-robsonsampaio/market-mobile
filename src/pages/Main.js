@@ -8,13 +8,13 @@ function Main({ navigation }){
     const [clients, setClients] = useState([])
 
     useEffect( () => {
+        async function loadClients(){
+            const response = await api.get('/clients')
+            setClients(response.data)
+        }
+
         loadClients()
     },[]);
-
-    async function loadClients(){
-        const response = await api.get('/clients')
-        setClients(response.data)
-    }
 
     return (
         <ScrollView>

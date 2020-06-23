@@ -1,19 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import api from '../api';
+
 
 function Basket(props){    
 
+    const { client, basket } = props
     const [ item, setItem ]  = useState(props.item)  
+    const [ itemId, setItemId ] = useState(basket.indexOf(item))
     const [ intemStyle, setItemStyle ] = useState({ color: '#ffffff'})
 
     useEffect(() => {
-      console.log(item)
+      
+      console.log("Faith")
+      // updateBasket({_id: client._id, basket: basket})      
 
     },[item])
 
+    useEffect(() => {
+      
+    }, [client])
+
+    async function updateBasket(data){
+      console.log(data)
+      const client = await api.put('/clients', data)
+    }
+
     function changeState(state){    
-        setItem({ _id:item._id, product:item.product, quantity:item.quantity, weight:item.weight, state:state })        
+        setItem({ _id:item._id, product:item.product, quantity:item.quantity, weight:item.weight, state:state })    
+        updateBasket({_id:client._id, item_id:itemId, state:state})    
     }
   
     return ( 

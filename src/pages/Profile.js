@@ -44,7 +44,8 @@ function Profile({ navigation }){
                         <Basket  
                             key={item._id} 
                             item={item} 
-                            basket={basket} />
+                            client={client}
+                            basket={basket}/>
                      ))
                 }                  
         </ScrollView>

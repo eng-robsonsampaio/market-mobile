@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native'; 
 import { MaterialIcons } from '@expo/vector-icons';
 
-function HeaderProfile({ client, navigation }){
+function HeaderProfile({ client, navigation}){
 
     return (
         <>
@@ -17,6 +17,7 @@ function HeaderProfile({ client, navigation }){
                     {
                         navigation.navigate('Profile', { 
                         client: client,
+
                     });
                     }} 
                      style={styles.loadProfile} >
