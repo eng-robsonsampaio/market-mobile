@@ -6,30 +6,14 @@ import api from '../api';
 
 function Basket(props){    
 
-    const { client, basket } = props
-    const [ item, setItem ]  = useState(props.item)  
-    const [ itemId, setItemId ] = useState(basket.indexOf(item))
-    const [ intemStyle, setItemStyle ] = useState({ color: '#ffffff'})
+    const { client, item, index } = props
+    const [ state, setState ]  = useState(item.state)    
+    const [ intemStyle, setItemStyle ] = useState({ color: '#ffffff'})   
 
-    useEffect(() => {
-      
-      console.log("Faith")
-      // updateBasket({_id: client._id, basket: basket})      
-
-    },[item])
-
-    useEffect(() => {
-      
-    }, [client])
-
-    async function updateBasket(data){
-      console.log(data)
-      const client = await api.put('/clients', data)
-    }
-
-    function changeState(state){    
-        setItem({ _id:item._id, product:item.product, quantity:item.quantity, weight:item.weight, state:state })    
-        updateBasket({_id:client._id, item_id:itemId, state:state})    
+    async function changeState(state){       
+        await api.put('/clients', { _id:client._id, item_id:index, state:state })
+        setState(state)
+        props.updateBasket(item._id)
     }
   
     return ( 
@@ -40,8 +24,8 @@ function Basket(props){
             <View style={styles.quantityContainer}>
               <Text style={styles.quantityValue}>{item.quantity}</Text>
             </View>
-            <TouchableOpacity onPress={() => {changeState(!item.state)}} style={styles.checkItem}>
-                 <MaterialIcons name={item.state ? 'check-circle' : 'radio-button-unchecked'} size={30} style={intemStyle}/>
+            <TouchableOpacity onPress={() => {changeState(!state)}} style={styles.checkItem}>
+                 <MaterialIcons name={state ? 'check-box' : 'check-box-outline-blank'} size={30} style={intemStyle}/>
             </TouchableOpacity>
           </View>
      );

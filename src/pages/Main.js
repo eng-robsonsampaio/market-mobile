@@ -10,10 +10,12 @@ function Main({ navigation }){
     useEffect( () => {
         async function loadClients(){
             const response = await api.get('/clients')
+            // console.log(response.data)
             setClients(response.data)
         }
 
-        loadClients()
+        loadClients()        
+        
     },[]);
 
     return (

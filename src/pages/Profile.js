@@ -7,8 +7,20 @@ import Basket from './Basket'
 function Profile({ navigation }){
 
     const client = navigation.getParam('client')
-    const { name, avatar, basket } = client;
+    const { name, avatar } = client;
+    const [ basket, setBasket ] = useState(client.basket)
     const [ screenWidth, setScreenWidth ] = useState(Dimensions.get('window').width);
+
+    function updateBasket(id) {
+        const newBasket = basket.map(item => {
+          if(item._id == id){
+              item.state = !item.state
+              console.log(item)
+          }
+          return item
+        })
+        setBasket(newBasket)
+    }
 
       
     return (
@@ -22,10 +34,7 @@ function Profile({ navigation }){
             
                 <View style={styles.contact}>
                     <TouchableOpacity style={styles.phoneIcon}>
-                        <MaterialIcons name="phone-forwarded" size={30} color="#000"/>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.chatIcon}>
-                        <MaterialIcons name="sms" size={30} color="#000"/>
+                        <MaterialIcons name="shopping-cart" size={30} color="#000"/>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -40,12 +49,13 @@ function Profile({ navigation }){
         </View>
         <ScrollView >
                 {
-                    basket.map( item =>(
+                    basket.map( (item, index) => (
                         <Basket  
                             key={item._id} 
-                            item={item} 
+                            item={item}
+                            index={index} 
                             client={client}
-                            basket={basket}/>
+                            updateBasket={updateBasket}/>
                      ))
                 }                  
         </ScrollView>

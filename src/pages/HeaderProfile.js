@@ -17,7 +17,6 @@ function HeaderProfile({ client, navigation}){
                     {
                         navigation.navigate('Profile', { 
                         client: client,
-
                     });
                     }} 
                      style={styles.loadProfile} >
