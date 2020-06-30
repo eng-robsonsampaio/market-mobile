@@ -4,6 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 function HeaderProfile({ client, navigation}){
 
+
     return (
         <>
         <View style={styles.container}>
@@ -11,7 +12,10 @@ function HeaderProfile({ client, navigation}){
                 <Image 
                     style={styles.avatar} 
                     source={{ uri: client.avatar }} />
-                <Text style={styles.clientName}>{client.name}</Text>
+                <View style={styles.nameAndGoods}>
+                    <Text style={styles.clientName}>{client.name}</Text>
+                    <Text style={styles.basketLenght}>Cesta com {client.basket.length} itens</Text>
+                </View>
                 <TouchableOpacity 
                     onPress={() => 
                     {
@@ -20,7 +24,7 @@ function HeaderProfile({ client, navigation}){
                     });
                     }} 
                      style={styles.loadProfile} >
-                    <MaterialIcons name='keyboard-arrow-right' size={40} color="#000"/>
+                    <MaterialIcons name='keyboard-arrow-right' size={40} color="#FF9B04"/>
                 </TouchableOpacity>
             </View>
         </View>       
@@ -30,11 +34,10 @@ function HeaderProfile({ client, navigation}){
 
 const styles = StyleSheet.create({
     avatar:{
-        width: 60,
-        height: 60,
+        width: 59,
+        height: 59,
         borderRadius: 50,
         borderWidth: 2,
-        borderColor: "#006A4E",
         shadowColor: '#000',
         shadowOpacity: 0.2,
         shadowOffset:{
@@ -46,30 +49,41 @@ const styles = StyleSheet.create({
     container:{
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 10,
+        marginTop: 4,
         elevation: 2
     },
     clientHeader:{
         flex: 0,
         height: 80,
-        width: 300,
+        width: 315,
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: '#ccc',
+        backgroundColor: '#F3E6DB',
 
+    },
+    nameAndGoods:{
+        flex: 0,
+        justifyContent: 'space-between',
+        alignContent: 'center'
+        
     },
     clientName:{
         width: 160,
         // backgroundColor: "#ddd",
         fontWeight: 'bold',
-        fontSize: 23,
-        marginLeft: 10,
+        fontSize: 20,
+        marginLeft: 5,
+    },
+    basketLenght: {
+        color: '#706E6E',
+        fontSize: 15,
+        marginLeft: 5,
     },
     loadProfile:{
         justifyContent: "center",
         alignItems: "center",
-        marginLeft: 15
+        marginLeft: 35
 
     },
 })

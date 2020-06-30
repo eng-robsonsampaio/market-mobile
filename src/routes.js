@@ -1,5 +1,6 @@
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator, CardStyleInterpolators  } from 'react-navigation-stack';
+import { View } from 'react-native'
 
 
 import Main from './pages/Main';
@@ -27,13 +28,14 @@ const Routes = createAppContainer(
         {
             defaultNavigationOptions:{
                 headerBackTitleVisible: null,
-                headerTintColor: '#000',
+                headerTintColor: '#fff',
                 headerStyle:{
-                    backgroundColor: '#FCAF03',                                        
+                    backgroundColor: '#FEC831', 
+                    height: 130,                                      
                 },
                 headerTitleStyle:{
-                    fontWeight: 'bold',
-                    fontSize: 25,
+                    fontFamily: 'Roboto',
+                    fontSize: 40,
                 }
             }
         })
