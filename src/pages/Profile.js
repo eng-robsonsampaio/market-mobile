@@ -26,26 +26,27 @@ function Profile({ navigation }){
     return (
         <>
         <View style={styles.container}>
-            <View style={styles.header}>
-                <Image 
+           <View style={styles.header}>
+                 <Image 
                     style={styles.avatar} 
                     source={{ uri: avatar }} />
                 <Text style={styles.clientName}>{ name }</Text>
             
                 <View style={styles.contact}>
                     <TouchableOpacity style={styles.phoneIcon}>
-                        <MaterialIcons name="shopping-cart" size={30} color="#000"/>
+                        <MaterialIcons name="shopping-cart" size={30} color="#FF5700"/>
                     </TouchableOpacity>
-                </View>
+                </View> 
             </View>
-            {/* <View style={styles.subHeaders}>
+        
+            <View style={styles.subHeaders}>
                 <TouchableOpacity onPress={()=>{console.log("tste")}}>
-                    <Text style={styles.toDoList}> List </Text>
+                    <Text style={styles.toDoList}> Produto </Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>{console.log("teste done")}}>
-                    <Text style={styles.doneList}> Basket </Text>
+                    <Text style={styles.doneList}> Quantidade </Text>
                 </TouchableOpacity>                
-            </View> */}
+            </View>
         </View>
         <ScrollView >
                 {
@@ -64,34 +65,31 @@ function Profile({ navigation }){
 }
 
 const styles = StyleSheet.create({
-viewPager: {
-    flex: 1
-    },
-    pageStyle: {
-    alignItems: 'center',
-    padding: 20,
-    },
+    // viewPager: {
+    //     flex: 1
+    // },
+    // pageStyle: {
+    //     alignItems: 'center',
+    //     padding: 20,
+    // },
     container:{
-        height: 120,
-        backgroundColor: '#aaa',
-        marginBottom: 3,
+        backgroundColor: '#FEC831',
         justifyContent: 'center',
-
+        alignItems: 'center',
+        // height: 12,
     },
     header:{
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 10,
+        width: 310,
+        height: 77,
+        backgroundColor: '#FFE9A1',
     },
     avatar:{
         width: 60,
         height: 60,
         borderRadius: 50,
-        borderWidth: 2,
-        borderColor: "#006A4E",
-        shadowColor: '#000',
-        shadowOpacity: 0.2,
         shadowOffset:{
             width: 4,
             height: 4,
@@ -100,8 +98,8 @@ viewPager: {
     },
     clientName:{
         width: 140,
-        fontWeight: 'bold',
-        fontSize: 23,
+        fontSize: 22,
+        fontFamily: 'Roboto',
         marginLeft: 10,
     },
     contact:{
@@ -111,29 +109,25 @@ viewPager: {
         justifyContent: 'space-around',
         
     },
-    phoneIcon:{
-        // backgroundColor: '#0000ff88',
-    },
-    chatIcon:{
-        // backgroundColor: '#00ff0088',
-
-    },
     subHeaders:{
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
-        marginTop: 15,
-        backgroundColor: '#ccc'
+        width: 330,
+        height: 34,
+        marginTop: 5,
+        backgroundColor: '#FFAD33'
     },
     toDoList:{
+        fontSize: 16,
         fontWeight: 'bold',
-        color: '#4e4e4e',
+        color: '#000',
 
     },
     doneList:{
+        fontSize: 16,
         fontWeight: 'bold',
-        color: '#4e4e4e',
+        color: '#000',
     },
 })
 

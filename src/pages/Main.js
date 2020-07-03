@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView } from 'react-native';
-import HeaderProfile from './HeaderProfile';
+import ProfileCard from './ProfileCard';
 import api from '../api';
 
 
@@ -22,7 +22,7 @@ function Main({ navigation }){
         <ScrollView>
             {
                 clients.map(client => (
-                    <HeaderProfile 
+                    <ProfileCard
                         key={client._id} 
                         navigation={navigation}
                         client={client}/>

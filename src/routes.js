@@ -1,7 +1,6 @@
+import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator, CardStyleInterpolators  } from 'react-navigation-stack';
-import { View } from 'react-native'
-
 
 import Main from './pages/Main';
 import Profile from './pages/Profile';
@@ -12,16 +11,17 @@ const Routes = createAppContainer(
             screen: Main, 
             navigationOptions:{
                 title: 'Market',
-                headerTitleAlign: 'center',
+                headerTitleAlign: 'left',
             },
         }, 
         
         Profile:{
             screen: Profile,
-            navigationOptions:{
-                title: 'Basket',
+            navigationOptions:{                
+                headerTitle: 'Profile',
                 headerTitleAlign: 'center',
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,    
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,   
+                 
             },
         },
     },
@@ -31,11 +31,14 @@ const Routes = createAppContainer(
                 headerTintColor: '#fff',
                 headerStyle:{
                     backgroundColor: '#FEC831', 
-                    height: 130,                                      
+                    height: 60,
+                    elevation: 0,
                 },
                 headerTitleStyle:{
                     fontFamily: 'Roboto',
-                    fontSize: 40,
+                    fontSize: 30,  
+                    
+                    fontWeight: "bold"
                 }
             }
         })

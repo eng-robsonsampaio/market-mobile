@@ -8,7 +8,7 @@ function Basket(props){
 
     const { client, item, index } = props
     const [ state, setState ]  = useState(item.state)    
-    const [ intemStyle, setItemStyle ] = useState({ color: '#ffffff'})   
+    const [ intemStyle, setItemStyle ] = useState({ color: '#000'})   
 
     async function changeState(state){       
         await api.put('/clients', { _id:client._id, item_id:index, state:state })
@@ -33,24 +33,25 @@ function Basket(props){
 
 const styles = StyleSheet.create({
   container:{
-    height: 80,
-    marginTop: 0,
-    backgroundColor: '#ccc',
+    height: 65,
+    paddingBottom: 15,
+    marginHorizontal: 4,
+    backgroundColor: '#fff',
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    borderBottomWidth: 1,
   },
   productContainer:{
-    width: 210,
-    height: 60,
-    borderRadius: 5,
-    borderWidth: 2,
-    borderColor: '#ffaa0088',
+    width: 200,
+    // height: 60,
+    // borderRadius: 5,
+    // borderWidth: 2,
+    // borderColor: '#ffaa0088',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginLeft: 4,
-    backgroundColor: '#e6e6e6',
+    // marginLeft: 4,
+    // backgroundColor: '#e6e6e6',
   },
   productValue:{
     marginLeft: 10,
@@ -58,19 +59,20 @@ const styles = StyleSheet.create({
   },
   quantityContainer:{
     width: 60,
-    height: 60,
-    backgroundColor: '#e6e6e6',
-    borderRadius: 5,
-    borderWidth: 2,
-    borderColor: '#ffaa0088',
+    // height: 60,
+    // backgroundColor: '#e6e6e6',
+    // borderRadius: 5,
+    // borderWidth: 2,
+    // borderColor: '#ffaa0088',
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 0,
+    
   },
   quantityValue:{
     fontSize: 20,
   },
   checkItem:{
+    marginLeft: 15,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 5,

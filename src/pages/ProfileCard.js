@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native'; 
 import { MaterialIcons } from '@expo/vector-icons';
 
-function HeaderProfile({ client, navigation}){
+function ProfileCard({ client, navigation}){
 
 
     return (
@@ -33,6 +33,14 @@ function HeaderProfile({ client, navigation}){
 }    
 
 const styles = StyleSheet.create({
+    // viewPager: {
+    //     flex: 1
+    // },
+    // pageStyle: {
+    //     alignItems: 'center',
+    //     // padding: 20,
+    //     backgroundColor: '#FEC831'
+    // },
     avatar:{
         width: 59,
         height: 59,
@@ -50,16 +58,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 4,
-        elevation: 2
+        elevation: 5,
+        
     },
     clientHeader:{
         flex: 0,
         height: 80,
-        width: 315,
+        width: 310,
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: '#F3E6DB',
+        backgroundColor: '#FFE9A1',
 
     },
     nameAndGoods:{
@@ -88,4 +97,4 @@ const styles = StyleSheet.create({
     },
 })
  
-export default HeaderProfile;
+export default ProfileCard;
