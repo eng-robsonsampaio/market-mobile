@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Text, Image, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
+import { 
+        View, 
+        StyleSheet, 
+        Text, 
+        Image, 
+        TouchableOpacity, 
+        ScrollView, 
+        Dimensions,
+        Modal, 
+        TouchableHighlight} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import Basket from './Basket'
@@ -10,6 +19,7 @@ function Profile({ navigation }){
     const { name, avatar } = client;
     const [ basket, setBasket ] = useState(client.basket)
     const [ screenWidth, setScreenWidth ] = useState(Dimensions.get('window').width);
+    const [modalVisible, setModalVisible] = useState(false);
 
     function updateBasket(id) {
         const newBasket = basket.map(item => {
@@ -25,6 +35,37 @@ function Profile({ navigation }){
       
     return (
         <>
+        <View style={styles.centeredView}>
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                Alert.alert("Modal has been closed.");
+                }}>
+                <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                    <Text style={styles.modalText}>Finalizar compras?</Text>
+                    <View style={styles.buttonsContainer}>
+                        <TouchableHighlight
+                            style={{ ...styles.openButton, backgroundColor: "#DEDEDE" }}
+                            onPress={() => {
+                                setModalVisible(!modalVisible);
+                            }}>
+                        <Text style={styles.textStyle}>Não</Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            style={{ ...styles.openButton, backgroundColor: "#FFC043" }}
+                            onPress={() => {
+                                setModalVisible(!modalVisible);
+                            }}>
+                        <Text style={styles.textStyle}>Sim</Text>
+                        </TouchableHighlight>
+                    </View>                
+                </View>
+                </View>
+            </Modal>
+        </View>
         <View style={styles.container}>
            <View style={styles.header}>
                  <Image 
@@ -33,7 +74,9 @@ function Profile({ navigation }){
                 <Text style={styles.clientName}>{ name }</Text>
             
                 <View style={styles.contact}>
-                    <TouchableOpacity style={styles.phoneIcon}>
+                    <TouchableOpacity style={styles.phoneIcon} onPress={() => {
+                      setModalVisible(!modalVisible)
+                    }}>
                         <MaterialIcons name="shopping-cart" size={30} color="#FF5700"/>
                     </TouchableOpacity>
                 </View> 
@@ -72,6 +115,55 @@ const styles = StyleSheet.create({
     //     alignItems: 'center',
     //     padding: 20,
     // },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: 'rgba(0,0,0,0.7)'
+      },
+      modalView: {
+          
+        width: 290,
+        height: 158,
+        // margin: 20,
+        backgroundColor: "white",
+        borderRadius: 5,
+        paddingTop: 35,
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5
+      },
+      buttonsContainer:{
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+      },
+      openButton: {
+        width: 110, 
+        height: 40,
+        backgroundColor: "#F194FF",
+        borderRadius: 5,
+        padding: 10,
+        elevation: 2,
+        justifyContent: "center",
+        alignItems: "center",
+      },
+      textStyle: {
+        color: "#000",
+        fontFamily: 'Roboto',
+        fontSize: 20,
+        textAlign: "center"
+      },
+      modalText: {
+        fontFamily: 'Roboto',
+        fontSize: 25,
+        marginBottom: 15,
+        textAlign: "center"
+      },
     container:{
         backgroundColor: '#FEC831',
         justifyContent: 'center',

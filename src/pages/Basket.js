@@ -7,12 +7,12 @@ import api from '../api';
 function Basket(props){    
 
     const { client, item, index } = props
-    const [ state, setState ]  = useState(item.state)    
+    const [ itemStatus, setState ]  = useState(item.itemStatus)    
     const [ intemStyle, setItemStyle ] = useState({ color: '#000'})   
 
-    async function changeState(state){       
-        await api.put('/clients', { _id:client._id, item_id:index, state:state })
-        setState(state)
+    async function changeState(itemStatus){       
+        await api.put('/clients', { _id:client._id, item_id:index, itemStatus:itemStatus })
+        setState(itemStatus)
         props.updateBasket(item._id)
     }
   
@@ -24,8 +24,8 @@ function Basket(props){
             <View style={styles.quantityContainer}>
               <Text style={styles.quantityValue}>{item.quantity}</Text>
             </View>
-            <TouchableOpacity onPress={() => {changeState(!state)}} style={styles.checkItem}>
-                 <MaterialIcons name={state ? 'check-box' : 'check-box-outline-blank'} size={30} style={intemStyle}/>
+            <TouchableOpacity onPress={() => {changeState(!itemStatus)}} style={styles.checkItem}>
+                 <MaterialIcons name={itemStatus ? 'check-circle' : 'radio-button-unchecked'} size={30} style={intemStyle}/>
             </TouchableOpacity>
           </View>
      );
