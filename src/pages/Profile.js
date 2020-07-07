@@ -24,7 +24,7 @@ function Profile({ navigation }){
     function updateBasket(id) {
         const newBasket = basket.map(item => {
           if(item._id == id){
-              item.state = !item.state
+              item.itemStatus = !item.itemStatus
               console.log(item)
           }
           return item
