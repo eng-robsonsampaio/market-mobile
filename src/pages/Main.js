@@ -4,6 +4,16 @@ import ProfileCard from './ProfileCard';
 import api from '../api';
 
 
+function showClient(client, navigation) {
+    if( client.clientStatus === false ){
+        return(
+            <ProfileCard
+                key={client._id} 
+                navigation={navigation}
+                client={client}/>)
+    }    
+}
+
 function Main({ navigation }){
     const [clients, setClients] = useState([])
 
@@ -22,11 +32,7 @@ function Main({ navigation }){
         <ScrollView>
             {
                 clients.map(client => (
-                    client.clientStatus == false ?
-                    <ProfileCard
-                        key={client._id} 
-                        navigation={navigation}
-                        client={client}/> : <View key={client._id}></View>
+                    showClient(client, navigation)
                 ))
             }         
         </ScrollView>

@@ -8,7 +8,7 @@ function Basket(props){
 
     const { client, item, index } = props
     const [ itemStatus, setState ]  = useState(item.itemStatus)    
-    const [ intemStyle, setItemStyle ] = useState({ color: '#000'})   
+    const [ intemStyle, setItemStyle ] = useState({ color: '#000'})    
 
     async function changeState(itemStatus){       
         await api.put('/clients', { _id:client._id, item_id:index, itemStatus:itemStatus })

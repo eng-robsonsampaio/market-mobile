@@ -15,11 +15,27 @@ import Basket from './Basket'
 
 function Profile({ navigation }){
 
-    const client = navigation.getParam('client')
+    // const client = navigation.getParam('client')
+    const [ client, setClient ] = useState(navigation.getParam('client'))
     const { name, avatar } = client;
     const [ basket, setBasket ] = useState(client.basket)
+    const [ basketLength, setBasketLength ] = useState(client.basket.length)
     const [ screenWidth, setScreenWidth ] = useState(Dimensions.get('window').width);
     const [modalVisible, setModalVisible] = useState(false);
+
+    useEffect(() => {
+        let cont = 0;
+        basket.map((item) => {
+          if(item.itemStatus){
+              cont += 1
+              if(basketLength === cont){ 
+                  setModalVisible(!modalVisible); 
+            }
+          }
+        })
+
+      
+    },[basket])
 
     function updateBasket(id) {
         const newBasket = basket.map(item => {
@@ -30,6 +46,13 @@ function Profile({ navigation }){
           return item
         })
         setBasket(newBasket)
+    }
+
+    function updateClientStatus(){
+        let newClient = client
+        newClient.clientStatus = true
+        setClient(newClient)
+
     }
 
       
@@ -57,7 +80,7 @@ function Profile({ navigation }){
                         <TouchableHighlight
                             style={{ ...styles.openButton, backgroundColor: "#FFC043" }}
                             onPress={() => {
-                                setModalVisible(!modalVisible);
+                                updateClientStatus();
                             }}>
                         <Text style={styles.textStyle}>Sim</Text>
                         </TouchableHighlight>
