@@ -4,18 +4,29 @@ import ProfileCard from './ProfileCard';
 import api from '../api';
 
 
-function showClient(client, navigation) {
-    if( client.clientStatus === false ){
-        return(
-            <ProfileCard
-                key={client._id} 
-                navigation={navigation}
-                client={client}/>)
-    }    
-}
-
 function Main({ navigation }){
     const [clients, setClients] = useState([])
+
+    function updateClients(clientID){
+        const newClients = clients.map((client) => {
+          if(client._id === clientID){
+              client.clientStatus = true
+          }
+          return client;
+        })
+        setClients(newClients)
+    }
+
+    function showClient(client, navigation) {
+        if( client.clientStatus === false ){
+            return(
+                <ProfileCard
+                    key={client._id} 
+                    updateClients={updateClients}
+                    navigation={navigation}
+                    client={client}/>)
+        }    
+    }
 
     useEffect( () => {
         async function loadClients(){

@@ -16,6 +16,7 @@ import Basket from './Basket'
 function Profile({ navigation }){
 
     // const client = navigation.getParam('client')
+    const updateClients = navigation.getParam('updateClients')
     const [ client, setClient ] = useState(navigation.getParam('client'))
     const { name, avatar } = client;
     const [ basket, setBasket ] = useState(client.basket)
@@ -49,10 +50,10 @@ function Profile({ navigation }){
     }
 
     function updateClientStatus(){
-        let newClient = client
-        newClient.clientStatus = true
-        setClient(newClient)
-
+        // updateClients(client._id)
+        // let newClient = client
+        // newClient.clientStatus = true
+        // setClient(newClient)
     }
 
       
@@ -80,7 +81,7 @@ function Profile({ navigation }){
                         <TouchableHighlight
                             style={{ ...styles.openButton, backgroundColor: "#FFC043" }}
                             onPress={() => {
-                                updateClientStatus();
+                                updateClients(client._id);
                             }}>
                         <Text style={styles.textStyle}>Sim</Text>
                         </TouchableHighlight>

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native'; 
 import { MaterialIcons } from '@expo/vector-icons';
 
-function ProfileCard({ client, navigation}){
+function ProfileCard({ client, navigation, updateClients}){
 
 
     return (
@@ -21,6 +21,7 @@ function ProfileCard({ client, navigation}){
                     {
                         navigation.navigate('Profile', { 
                         client: client,
+                        updateClients: updateClients,
                     });
                     }} 
                      style={styles.loadProfile} >
